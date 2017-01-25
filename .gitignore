@@ -54,3 +54,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+# User files
+env_p.txt

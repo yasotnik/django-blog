@@ -12,6 +12,20 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+# Function to load env variables
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+# SECRET_KEY variable stored in environment
+SECRET_KEY = get_env_variable('SECRET_KEY')
+# DB_PASSWORD variable stored in environment
+DB_PASSWORD = get_env_variable('DB_PASSWORD')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oi6tyxcqj%bu)elppshu(ld+8qmky0vn_a7vw8sq_*cl^+#_2q'
+# SECRET_KEY = 'oi6tyxcqj%bu)elppshu(ld+8qmky0vn_a7vw8sq_*cl^+#_2q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,11 +86,23 @@ WSGI_APPLICATION = 'djblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+# Default DB
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
+# PostgreSQL Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'djblog_db',
+        'USER': 'djblogadmin',
+        'PASSWORD': DB_PASSWORD,
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
