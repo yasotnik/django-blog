@@ -1,0 +1,17 @@
+{% block content %}
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1> Good news everyone!</h1>
+            <p> Here you can see all posts</p>
+        </div>
+        {% if object_list %}
+            {% for post in object_list %}
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.body }}</p>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+{% endblock content %}
