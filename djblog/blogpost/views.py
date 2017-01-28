@@ -8,3 +8,8 @@ class PostsView(generic.ListView):
 
     def get_queryset(self):
         return Post.objects.all()
+
+
+class PostView(generic.DeleteView):
+    model = Post
+    template_name = 'blogpost/post.html'

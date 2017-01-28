@@ -1,0 +1,15 @@
+{% extends "blogpost/base.html" %}
+{% block title %} Simple django blog CMS {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>{{ post.title }}</h1>
+        <p>Simple way to keep an eye on all PS4 games with beta access</p>
+    </div>
+    <div class="col-lg-12 col-xs-12 col-md-12">
+        <p>{{ post.body }}</p>
+    </div>
+
+</div>
+
+{% endblock content %}

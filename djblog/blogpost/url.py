@@ -8,4 +8,7 @@ urlpatterns = [
     # URL for main page /blogpost
     url(r'^$', views.PostsView.as_view(), name='index'),
 
+    # URL for posts
+    url(r'^view/(?P<slug>[^\.]+)/$', views.PostView.as_view(), name='post'),
+
 ]

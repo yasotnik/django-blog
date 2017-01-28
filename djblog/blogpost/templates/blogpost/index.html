@@ -17,7 +17,8 @@
             </div>
             <div>
                 <div class="posted-date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
-                <div class="pull-right"><button class="btn btn-info">Read</button></div>
+                <div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="btn
+                btn-info">Read</a></div>
             </div>
         </div>
         <div class="col-lg-1 col-md-1"></div>
