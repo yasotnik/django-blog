@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron">
-        <h1>The best cartoons ever!</h1>
-        <p>Simple way to keep an eye on all PS4 games with beta access</p>
+        <h1>{{ blog.title }}</h1>
+        <p>{{ blog.description }}</p>
     </div>
     <div class="posts col-lg-12 col-xs-12 col-md-12">
         {% for post in object_list %}
@@ -13,7 +13,7 @@
                 <h3>{{ post.title }}<small class="title-category">{{ post.category }}</small></h3>
             </div>
             <div class="post-preview">
-                <p>{{ post.body_preview|safe }}</p>
+                <p>{{ post.body_preview }}</p>
             </div>
             <div>
                 <div class="posted-date pull-left">{{ post.posted|date:"d-m-Y" }}</div>

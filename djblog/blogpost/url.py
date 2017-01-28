@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^$', views.PostsView.as_view(), name='index'),
 
     # URL for posts
-    url(r'^view/(?P<slug>[^\.]+)/$', views.PostView.as_view(), name='post'),
+    url(r'^view/(?P<slug>[^\.]+)/$', views.PostDetailView.as_view(), name='post'),
 
 ]

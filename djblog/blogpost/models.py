@@ -1,7 +1,13 @@
 from django.db import models
-
-# Create your models here.
 from django.db.models import permalink
+
+
+class BlogSettings(models.Model):
+    title = models.CharField(max_length=30)
+    description = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "Blog settings"
 
 
 class Post(models.Model):
