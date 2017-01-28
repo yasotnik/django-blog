@@ -1,17 +1,31 @@
+{% extends "blogpost/base.html" %}
+{% block title %} Simple django blog CMS {% endblock %}
 {% block content %}
-
-    <div class="container">
-        <div class="jumbotron">
-            <h1> Good news everyone!</h1>
-            <p> Here you can see all posts</p>
-        </div>
-        {% if object_list %}
-            {% for post in object_list %}
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.body }}</p>
-            {% endfor %}
-        {% endif %}
-
+<div class="container">
+    <div class="jumbotron">
+        <h1>The best cartoons ever!</h1>
+        <p>Simple way to keep an eye on all PS4 games with beta access</p>
     </div>
+    <div class="posts col-lg-12 col-xs-12 col-md-12">
+        {% for post in object_list %}
+        <div class="post col-lg-5 col-sm-12 col-xs-12 col-md-5">
+            <div class="heading">
+                <h3>{{ post.title }}<small class="title-category">{{ post.category }}</small></h3>
+            </div>
+            <div class="post-preview">
+                <p>{{ post.body_preview|safe }}</p>
+            </div>
+            <div>
+                <div class="posted-date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
+                <div class="pull-right"><button class="btn btn-info">Read</button></div>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1"></div>
+        {% empty %}
+            <h3>No posts yet.</h3>
+        {% endfor %}
+    </div>
+
+</div>
 
 {% endblock content %}

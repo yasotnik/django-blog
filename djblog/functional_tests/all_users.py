@@ -2,6 +2,7 @@
 from selenium import webdriver
 import unittest
 
+
 # Test class is inherit from unittest.TestCase
 class NewVisitorTest(unittest.TestCase):
 

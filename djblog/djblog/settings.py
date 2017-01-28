@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+
 # Function to load env variables
+from django.core.exceptions import ImproperlyConfigured
+
 
 def get_env_variable(var_name):
     try:
@@ -51,6 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Dev apps
+    'blogpost.apps.BlogpostConfig',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +144,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 # Static files (CSS, JavaScript, Images)

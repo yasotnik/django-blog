@@ -20,6 +20,6 @@ urlpatterns = [
     # Django admin url
     url(r'^admin/', admin.site.urls),
 
-    # URL from blog main page
-    url(r'^$', include('blogpost.url'))
+    # URLs fro blogpost app
+    url(r'^', include('blogpost.url'))
 ]

@@ -1,0 +1,20 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Load static files #}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'blogpost/style.css' %}" />
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<!-- header nav -->
+<nav class="navbar navbar-default">
+</nav>
+
+{% block content %}
+{% endblock %}

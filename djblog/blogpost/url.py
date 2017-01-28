@@ -5,7 +5,7 @@ app_name = 'blogpost'
 
 urlpatterns = [
 
-    # URL for main page /blog
-    url(r'^$', views.home_page, name='home'),
+    # URL for main page /blogpost
+    url(r'^$', views.PostsView.as_view(), name='index'),
 
 ]
