@@ -12,15 +12,13 @@ urlpatterns = [
     # URL for signup
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
 
-    # Logout
-    # url(r'^logout_user/$', views.logout_view, name='logout_user'),
-
     # URL for posts
     url(r'^post/(?P<slug>[^\.]+)/$', views.PostDetailView.as_view(), name='post'),
 
-    # Logout URL
-    url(r'^accounts/', include('registration.backends.simple.urls')),
+    # Login
+    url(r'^login/$', views.LoginView.as_view(), name='login_user'),
 
-    url('^', include('django.contrib.auth.urls')),
+    # Logout
+    url(r'^logout_user/$', views.LogoutView.as_view(), name='logout_user'),
 
 ]

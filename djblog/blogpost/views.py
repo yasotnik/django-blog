@@ -2,7 +2,7 @@ from django.views import generic
 from .models import Post, Category, BlogSettings
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View
+from django.views.generic import View, RedirectView, FormView
 from .forms import UserForm
 
 
@@ -37,11 +37,13 @@ class UserFormView(View):
     # display blank form
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
+        blog = BlogSettings.objects.all()[0]
+        return render(request, self.template_name, {'form': form, 'blog': blog})
 
     # reg user
     def post(self, request):
         form = self.form_class(request.POST)
+        blog = BlogSettings.objects.all()[0]
         if form.is_valid():
             user = form.save(commit=False)
             username = form.cleaned_data['username']
@@ -56,6 +58,29 @@ class UserFormView(View):
                     login(request, user)
                     return redirect('blogpost:index')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'blog': blog})
 
 
+class LoginView(RedirectView):
+    def post(self, request):
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('blogpost:index')
+                else:
+                    print('Not active')
+            else:
+                print('No user')
+                return redirect('blogpost:index')
+        print('Shit')
+        return redirect('blogpost:index')
+
+
+class LogoutView(RedirectView):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('blogpost:index')
