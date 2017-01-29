@@ -1,3 +1,13 @@
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
 /*Post style*/
 
 .post .title{
@@ -35,6 +45,14 @@
     width:100px;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  background-color: #f5f5f5;
+}
+
 /*Footer style*/
 
 .footer-bottom {
@@ -43,6 +61,7 @@
 	border-top: 1px solid #DDDDDD;
 	padding-top: 10px;
 	padding-bottom: 10px;
+    max-height: 50px;
 }
 .footer-bottom p.pull-left {
 	padding-top: 6px;
