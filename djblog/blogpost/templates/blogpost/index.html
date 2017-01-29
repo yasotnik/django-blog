@@ -10,10 +10,16 @@
         {% for post in object_list %}
         <div class="post col-lg-6 col-sm-12 col-xs-12 col-md-5">
             <div class="heading">
-                <div><h3>{{ post.title }}<small class="title">
-                    {{ post.category }}</small><small class="author"><a href="#">User</a></small></h3></div>
+                <div>
+                    <h3>
+                        {{ post.title }}
+                        <small class="title"><span class="glyphicon glyphicon-tag"></span><a
+                                href="#">{{ post.category }}</a></small>
+                        <small class="author"><span class="glyphicon glyphicon-user"></span><a href="#">User</a></small>
+                    </h3>
+                </div>
             </div>
-            <div>
+            <div class="image-container">
                 <img src="{{ post.image }}" class="image">
             </div>
             <div class="preview">
@@ -21,7 +27,7 @@
             </div>
             <div class="bottom">
                 <div class="date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
-                <div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="btn
+                <div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="read btn
                 btn-info">Read</a></div>
             </div>
         </div>

@@ -3,12 +3,18 @@
 .post .title{
     margin-left: 10px;
 }
-.post .heading {
-    line-height: 38px
+.post .title a{
+    margin-left: 5px;
 }
-.post .author{
-    float: right;
-    line-height: 38px;
+/*.post .heading {*/
+    /*line-height: 100px*/
+/*}*/
+/*.post .author{*/
+    /*float: right;*/
+    /*line-height: 100px;*/
+/*}*/
+.post .author a{
+    margin-left: 5px;
 }
 .post .date{
     font-style: italic;
@@ -24,6 +30,9 @@
 }
 .post .bottom {
     line-height: 38px;
+}
+.post .bottom .read{
+    width:100px;
 }
 
 /*Footer style*/
