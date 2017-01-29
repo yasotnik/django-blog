@@ -1,0 +1,43 @@
+/*Post style*/
+
+.post .title{
+    margin-left: 10px;
+}
+.post .heading {
+    line-height: 38px
+}
+.post .author{
+    float: right;
+    line-height: 38px;
+}
+.post .date{
+    font-style: italic;
+}
+.post .preview {
+    margin-top: 15px;
+}
+.post .image {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    min-height: 250px;
+}
+.post .bottom {
+    line-height: 38px;
+}
+
+/*Footer style*/
+
+.footer-bottom {
+	background: #E3E3E3;
+    margin-top: 50px;
+	border-top: 1px solid #DDDDDD;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+	padding-top: 6px;
+}
+.payments {
+	font-size: 1.5em;
+}

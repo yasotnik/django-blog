@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+
 urlpatterns = [
     # Django admin url
     url(r'^admin/', admin.site.urls),
+
 
     # URLs fro blogpost app
     url(r'^', include('blogpost.url'))

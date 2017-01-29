@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import permalink
+from django.contrib.auth.models import User
 
 
 class BlogSettings(models.Model):

@@ -7,7 +7,8 @@
 
 {# Load static files #}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'blogpost/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'blogpost/css/style.css' %}" />
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
@@ -20,3 +21,17 @@
 
 {% block content %}
 {% endblock %}
+
+<div class="footer-bottom navbar-fixed-bottom row-fluid">
+        <div class="container">
+            <p class="pull-left"> Copyright © 2016 - All Rights with {{ blog.title }} </p>
+            <div class="pull-right">
+                <ul class="nav nav-pills payments">
+                    <li><i class="fa fa-cc-visa"></i></li>
+                    <li><i class="fa fa-cc-mastercard"></i></li>
+                    <li><i class="fa fa-cc-amex"></i></li>
+                    <li><i class="fa fa-cc-paypal"></i></li>
+                </ul>
+            </div>
+        </div>
+</div>
