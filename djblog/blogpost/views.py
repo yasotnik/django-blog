@@ -86,7 +86,17 @@ class LogoutView(RedirectView):
         return redirect('blogpost:index')
 
 
+class ProfileView(generic.DetailView):
+    model = Post
+    template_name = 'blogpost/post.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context['blog'] = BlogSettings.objects.all()[0]
+        return context
+
+
 class ProfileUpdate(UpdateView):
     model = Profile
     # slug_field = 'username'
-    fields = ['url', 'avatar', 'facebook', 'twitter']
+    fields = ['avatar', 'facebook', 'twitter']

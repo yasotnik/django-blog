@@ -16,6 +16,7 @@ class BlogSettings(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=50, unique=True)
     body_preview = models.TextField(default="Preview of post", max_length=200, help_text="Brief overview of post")
     body = models.TextField()
@@ -45,7 +46,7 @@ class Category(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    slug = AutoSlugField(populate_from='User.username', default='', unique=True)
+    # slug = AutoSlugField(populate_from='User.username', default='', unique=True)
     FOLLOWER = 'FL'
     WRITER = 'WR'
     USER_GROUP = (

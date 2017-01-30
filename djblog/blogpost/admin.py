@@ -4,8 +4,12 @@ from .models import Post, Category, BlogSettings
 
 
 class PostAdmin(admin.ModelAdmin):
-    exclude = ['posted']
-    prepopulated_fields = {'slug': ('title',)}
+    exclude = ['posted', 'author']
+    prepopulated_fields = {'slug': ('title',),}
+
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
 
 
 class CategoryAdmin(admin.ModelAdmin):
