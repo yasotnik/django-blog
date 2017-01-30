@@ -35,9 +35,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				{% if user.is_authenticated %}
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><b>{{ user.username }}</b><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Profile</a></li>
+						<li><a href="{% url 'blogpost:profile_edit' %}">Profile</a></li>
 						<li><a href="#">Add post</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{% url 'blogpost:logout_user' %}">Logout</a></li>
@@ -88,10 +89,11 @@
 	<div class="container">
 		<p class="pull-left"> Copyright © 2016 - All Rights with {{ blog.title }} </p>
 		<div class="pull-right">
-			<ul class="nav nav-pills payments">
+			<ul class="nav nav-pills social">
 				<i class="fa fa-instagram" aria-hidden="true"></i>
 				<i class="fa fa-reddit" aria-hidden="true"></i>
 				<i class="fa fa-facebook-official" aria-hidden="true"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
 			</ul>
 		</div>
 	</div>

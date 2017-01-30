@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category, BlogSettings
+from .models import Post, Category, BlogSettings, Profile
 # Register your models here.
 
 
@@ -15,7 +15,13 @@ class PostAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
+
+class ProfileAdmin(admin.ModelAdmin):
+    exclude = ['slug', 'user']
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(BlogSettings)
+admin.site.register(Profile, ProfileAdmin)
 

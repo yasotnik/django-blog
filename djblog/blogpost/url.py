@@ -22,6 +22,9 @@ urlpatterns = [
     url(r'^logout_user/$', views.LogoutView.as_view(), name='logout_user'),
 
     # Profile settings
-    url(r'^profile/(?P<username>[^\.]+)/$', views.ProfileUpdate.as_view(), name='profile'),
+    url(r'^profile/$', views.ProfileUpdate.as_view(), name='profile_edit'),
+
+    # Profile
+    url(r'^profile/(?P<slug>[^\.]+)/$', views.ProfileView.as_view(), name='profile'),
 
 ]

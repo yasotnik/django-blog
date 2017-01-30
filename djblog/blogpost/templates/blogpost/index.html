@@ -1,5 +1,4 @@
 {% extends "blogpost/base.html" %}
-{% block title %} Simple django blog CMS {% endblock %}
 {% block content %}
 <div class="container">
 	<div class="jumbotron">
@@ -16,7 +15,7 @@
 						<small class="title"><span class="glyphicon glyphicon-tag"></span><a
 							href="#">{{ post.category }}</a></small>
 						<small class="author pull-right"><span class="glyphicon glyphicon-user"></span><a
-							href="#">{{ post.author }}</a></small>
+							href="{% url 'blogpost:profile' post.author %}">{{ post.author }}</a></small>
 					</h3>
 				</div>
 			</div>

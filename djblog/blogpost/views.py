@@ -2,8 +2,8 @@ from django.views import generic
 from .models import Post, Category, BlogSettings, Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View, RedirectView, UpdateView
-from .forms import UserForm
+from django.views.generic import View, RedirectView
+from .forms import UserForm, ProfileForm
 
 
 class PostsView(generic.ListView):
@@ -87,16 +87,36 @@ class LogoutView(RedirectView):
 
 
 class ProfileView(generic.DetailView):
-    model = Post
-    template_name = 'blogpost/post.html'
+    model = Profile
+    template_name = 'blogpost/profile.html'
 
     def get_context_data(self, **kwargs):
-        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context = super(ProfileView, self).get_context_data(**kwargs)
         context['blog'] = BlogSettings.objects.all()[0]
         return context
 
 
-class ProfileUpdate(UpdateView):
-    model = Profile
-    # slug_field = 'username'
-    fields = ['avatar', 'facebook', 'twitter']
+class ProfileUpdate(View):
+
+    form_class = ProfileForm
+    template_name = 'blogpost/profile_form.html'
+
+    # display blank form
+    def get(self, request):
+        form = self.form_class(None)
+        blog = BlogSettings.objects.all()[0]
+        return render(request, self.template_name, {'form': form, 'blog': blog})
+
+    # update profile
+    def post(self, request):
+        # p = request.POST.get('pk', None)
+        # model = Profile.objects.get_or_create(pk=p)
+        form = self.form_class(request.POST, instance=request.user.profile)
+        blog = BlogSettings.objects.all()[0]
+        if form.is_valid():
+            # user = request.POST.user
+            avatar = form.cleaned_data['avatar']
+            facebook = form.cleaned_data['facebook']
+            twitter = form.cleaned_data['twitter']
+            form.save()
+            return redirect('blogpost:index')

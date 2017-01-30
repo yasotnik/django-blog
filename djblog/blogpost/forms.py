@@ -13,6 +13,7 @@ class UserForm(forms.ModelForm):
 
 
 class ProfileForm(forms.ModelForm):
+
     class Meta:
         model = Profile
-        fields = ['url', 'avatar', 'facebook', 'twitter']
+        fields = ['avatar', 'facebook', 'twitter']

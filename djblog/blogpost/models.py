@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models import permalink
-from django.contrib.auth.models import User, AbstractUser
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.defaultfilters import slugify
 
 
 class BlogSettings(models.Model):
@@ -46,7 +46,6 @@ class Category(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # slug = AutoSlugField(populate_from='User.username', default='', unique=True)
     FOLLOWER = 'FL'
     WRITER = 'WR'
     USER_GROUP = (
@@ -54,22 +53,26 @@ class Profile(models.Model):
         (WRITER, 'Writer'),
     )
     user_group = models.CharField(max_length=2, choices=USER_GROUP, default=FOLLOWER)
-    url = models.SlugField(max_length=20, unique=True, db_index=True)
+    slug = models.SlugField(max_length=20, db_index=True)
     avatar = models.CharField(max_length=200)
     facebook = models.CharField(max_length=30, blank=True)
     twitter = models.CharField(max_length=30, blank=True)
 
-    @permalink
-    def get_absolute_url(self):
-        return 'view_user_profile', None, {'slug': self.slug}
+    def __str__(self):
+        return self.user.username
 
+    def get_username(self):
+        return self.user.username
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
 
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    def save(self, *args, **kwargs):
+            self.slug = slugify(self.user.username)
+            super(Profile, self).save(*args, **kwargs)
