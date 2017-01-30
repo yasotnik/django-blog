@@ -1,11 +1,9 @@
 {% extends "blogpost/base.html" %}
 {% block content %}
 <div class="container">
-	{% if user.is_authenticated %}
-	<h3>Sorry, you already have an account.</h3>
-	{% else %}
+
 	<div class="panel panel-default">
-		<div class="panel-body registration-panel">
+        <div class="panel-body registration-panel">
 			<div id="legend">
 				<legend class="">Sign up</legend>
 			</div>
@@ -22,6 +20,6 @@
 			</form>
 		</div>
 	</div>
-	{% endif %}
+
 </div>
 {% endblock content %}

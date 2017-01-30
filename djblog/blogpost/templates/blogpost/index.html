@@ -2,40 +2,39 @@
 {% block title %} Simple django blog CMS {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="jumbotron">
-        <h1>{{ blog.title }}</h1>
-        <p>{{ blog.description }}</p>
-    </div>
-    <div class="posts col-lg-12 col-xs-12 col-md-12">
-        {% for post in object_list %}
-        <div class="post col-lg-6 col-sm-12 col-xs-12 col-md-5">
-            <div class="heading">
-                <div>
-                    <h3>
-                        {{ post.title }}
-                        <small class="title"><span class="glyphicon glyphicon-tag"></span><a
-                                href="#">{{ post.category }}</a></small>
-                        <small class="author"><span class="glyphicon glyphicon-user"></span><a href="#">User</a></small>
-                    </h3>
-                </div>
-            </div>
-            <div class="image-container">
-                <img src="{{ post.image }}" class="image">
-            </div>
-            <div class="preview">
-                <p>{{ post.body_preview }}</p>
-            </div>
-            <div class="bottom">
-                <div class="date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
-                <div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="read btn
-                btn-info">Read</a></div>
-            </div>
-        </div>
-        {% empty %}
-            <h3>No posts yet.</h3>
-        {% endfor %}
-    </div>
-
+	<div class="jumbotron">
+		<h1>{{ blog.title }}</h1>
+		<p>{{ blog.description }}</p>
+	</div>
+	<div class="posts col-lg-12 col-xs-12 col-md-12">
+		{% for post in object_list %}
+		<div class="post col-lg-6 col-sm-12 col-xs-12 col-md-5">
+			<div class="heading">
+				<div>
+					<h3>
+						{{ post.title }}
+						<small class="title"><span class="glyphicon glyphicon-tag"></span><a
+							href="#">{{ post.category }}</a></small>
+						<small class="author pull-right"><span class="glyphicon glyphicon-user"></span><a
+							href="#">User</a></small>
+					</h3>
+				</div>
+			</div>
+			<div class="image-container">
+				<img src="{{ post.image }}" class="image">
+			</div>
+			<div class="preview">
+				<p>{{ post.body_preview }}</p>
+			</div>
+			<div class="bottom">
+				<div class="date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
+				<div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="read btn
+					btn-info">Read</a></div>
+			</div>
+		</div>
+		{% empty %}
+		<h3>No posts yet.</h3>
+		{% endfor %}
+	</div>
 </div>
-
 {% endblock content %}

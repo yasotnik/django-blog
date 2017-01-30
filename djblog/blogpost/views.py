@@ -1,8 +1,8 @@
 from django.views import generic
-from .models import Post, Category, BlogSettings
+from .models import Post, Category, BlogSettings, Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View, RedirectView, FormView
+from django.views.generic import View, RedirectView, UpdateView
 from .forms import UserForm
 
 
@@ -84,3 +84,9 @@ class LogoutView(RedirectView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('blogpost:index')
+
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    # slug_field = 'username'
+    fields = ['url', 'avatar', 'facebook', 'twitter']

@@ -107,8 +107,8 @@ WSGI_APPLICATION = 'djblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djblog_db',
-        'USER': 'djblogadmin',
+        'NAME': 'djangoblog',
+        'USER': 'blogadmin',
         'PASSWORD': DB_PASSWORD,
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -152,4 +152,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
