@@ -17,6 +17,7 @@ class BlogSettings(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # author = models.ForeignKey('auth.User')
     slug = models.SlugField(max_length=50, unique=True)
     body_preview = models.TextField(default="Preview of post", max_length=200, help_text="Brief overview of post")
     body = models.TextField()
@@ -29,7 +30,14 @@ class Post(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return 'view_blog_post', None, {'slug': self.slug}
+        return ('post', (),
+                {
+                    'slug': self.slug,
+                })
+
+    def save(self, *args, **kwargs):
+            self.slug = slugify(self.title)
+            super(Post, self).save(*args, **kwargs)
 
 
 class Category(models.Model):

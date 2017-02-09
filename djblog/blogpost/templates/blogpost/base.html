@@ -8,6 +8,7 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'blogpost/css/style.css' %}" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 <title>{{ blog.title }} - {{ blog.description }}</title>
@@ -39,7 +40,7 @@
                        aria-expanded="false"><b>{{ user.username }}</b><span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{% url 'blogpost:profile_edit' %}">Profile</a></li>
-						<li><a href="#">Add post</a></li>
+						<li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{% url 'blogpost:logout_user' %}">Logout</a></li>
 					</ul>

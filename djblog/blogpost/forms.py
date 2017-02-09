@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Post
 from django import forms
 
 
@@ -17,3 +17,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar', 'facebook', 'twitter']
+
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        exclude = ['author', 'slug']

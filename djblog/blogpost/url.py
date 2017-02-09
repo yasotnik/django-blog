@@ -15,6 +15,9 @@ urlpatterns = [
     # URL for posts
     url(r'^post/(?P<slug>[^\.]+)/$', views.PostDetailView.as_view(), name='post'),
 
+    # URL for creating a post
+    url(r'add_post/$', views.AddPostView.as_view(), name='add_post'),
+
     # Login
     url(r'^login/$', views.LoginView.as_view(), name='login_user'),
 

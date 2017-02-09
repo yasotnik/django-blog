@@ -43,7 +43,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.0.103',
+    '192.168.0.101',
     '127.0.0.1',
 ]
 
