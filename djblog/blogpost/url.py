@@ -28,6 +28,9 @@ urlpatterns = [
     url(r'^profile/$', views.ProfileUpdate.as_view(), name='profile_edit'),
 
     # Profile
-    url(r'^profile/(?P<slug>[^\.]+)/$', views.ProfileView.as_view(), name='profile'),
+    url(r'^user/(?P<slug>[^\.]+)/$', views.ProfileView.as_view(), name='profile'),
+
+    # URL for posts
+    url(r'^category/(?P<slug>[^\.]+)/$', views.CategoryDetailView.as_view(), name='category_view'),
 
 ]

@@ -1,6 +1,6 @@
 from django.views import generic
 from .models import Post, Category, BlogSettings, Profile
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, RedirectView, CreateView
 from .forms import UserForm, ProfileForm, PostForm
@@ -16,9 +16,6 @@ class PostsView(generic.ListView):
         context['blog'] = BlogSettings.objects.all()[0]
         return context
 
-    # def get_queryset(self):
-    #     return Post.objects.all()
-
 
 class PostDetailView(generic.DetailView):
     model = Post
@@ -28,6 +25,16 @@ class PostDetailView(generic.DetailView):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context['blog'] = BlogSettings.objects.all()[0]
         return context
+
+
+class CategoryDetailView(View):
+    template_name = 'blogpost/category.html'
+
+    def get(self, request, slug):
+        blog = BlogSettings.objects.all()[0]
+        category = get_object_or_404(Category, slug=slug)
+        posts = Post.objects.filter(category=category)
+        return render(request, self.template_name, {'blog': blog, 'posts': posts})
 
 
 class UserFormView(View):
@@ -117,11 +124,6 @@ class ProfileUpdate(View):
             twitter = form.cleaned_data['twitter']
             form.save()
             return redirect('blogpost:index')
-
-
-# class AddPostView(CreateView):
-#     model = Post
-#     fields = ['title', 'category', 'body_preview', 'body', 'image']
 
 
 class AddPostView(View):
