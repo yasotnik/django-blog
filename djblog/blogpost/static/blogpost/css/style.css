@@ -38,8 +38,8 @@ body {
 .post .image {
     width: 100%;
     height: auto;
-    max-height: 250px;
-    min-height: 250px;
+    max-height: 300px;
+    min-height: 300px;
 }
 .post .bottom {
     line-height: 38px;
@@ -93,9 +93,9 @@ body {
 /*Footer style*/
 
 .footer-bottom {
-	background: #E3E3E3;
+	background: #f8f8f8;
     margin-top: 50px;
-	border-top: 1px solid #DDDDDD;
+	border-top: 1px solid #e7e7e7;
 	padding-top: 10px;
 	padding-bottom: 10px;
     max-height: 50px;
@@ -157,3 +157,6 @@ body {
         border-top:0 none;
     }
 }
+
+
+/* Profile */

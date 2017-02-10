@@ -61,10 +61,13 @@ class Profile(models.Model):
         (WRITER, 'Writer'),
     )
     user_group = models.CharField(max_length=2, choices=USER_GROUP, default=FOLLOWER)
+    username = models.CharField(max_length=30, blank=True)
     slug = models.SlugField(max_length=20, db_index=True)
     avatar = models.CharField(max_length=200)
     facebook = models.CharField(max_length=30, blank=True)
     twitter = models.CharField(max_length=30, blank=True)
+    github = models.CharField(max_length=30, blank=True)
+    email = models.CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -83,4 +86,12 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
             self.slug = slugify(self.user.username)
+            self.username = self.user.username
             super(Profile, self).save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post)
+    profile = models.ForeignKey(Profile)
+    text = models.TextField(max_length=200)
+    user = models.OneToOneField(User)

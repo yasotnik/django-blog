@@ -1,9 +1,13 @@
 {% extends "blogpost/base.html" %}
 {% block content %}
     <div class="container">
-
-    <h3>{{ profile.user.username }}</h3>
-    <h3>{{ profile.twitter }}</h3>
-
+        <div class="span3 well">
+            <center>
+            <img src="{{ user.profile.avatar }}" name="aboutme" width="140" height="140" class="img-circle">
+            <h3>{{ user.profile.username }}<small>{{ user.profile.user_group }}</small></h3>
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>{{ user.profile.facebook }}
+            <i class="fa fa-twitter" aria-hidden="true"></i>{{ user.profile.twitter }}
+            </center>
+        </div>
     </div>
 {% endblock %}

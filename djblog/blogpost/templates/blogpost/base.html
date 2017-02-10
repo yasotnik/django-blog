@@ -39,10 +39,12 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><b>{{ user.username }}</b><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-                        {{ profile.user_group }}
-                        <li><a href="#">{{ user.profile.user_group }}</a></li>
+                        {% if user.profile.user_group == 'WR' %}
+						    <li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
+                        {% elif user.profile.user_group == 'AD' %}
+                            <li><a href="#">Admin panel</a></li>
+                        {% endif %}
 						<li><a href="{% url 'blogpost:profile_edit' %}">Profile</a></li>
-						<li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{% url 'blogpost:logout_user' %}">Logout</a></li>
 					</ul>
@@ -92,6 +94,7 @@
 
 
 <footer class="footer-bottom navbar-bottom row-fluid footer">
+    <div class="black-line"></div>
 	<div class="container">
 		<p class="pull-left"> Copyright © 2016 - All Rights with {{ blog.title }} </p>
 		<div class="pull-right">

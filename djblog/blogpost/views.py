@@ -3,7 +3,7 @@ from .models import Post, Category, BlogSettings, Profile
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, RedirectView, CreateView
-from .forms import UserForm, ProfileForm, PostForm
+from .forms import UserForm, ProfileForm, PostForm, CommentForm
 
 
 class PostsView(generic.ListView):
@@ -22,6 +22,7 @@ class PostDetailView(generic.DetailView):
     template_name = 'blogpost/post.html'
 
     def get_context_data(self, **kwargs):
+        form = CommentForm()
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context['blog'] = BlogSettings.objects.all()[0]
         return context

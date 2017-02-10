@@ -1,7 +1,7 @@
 {% extends "blogpost/base.html" %}
 {% block content %}
 <div class="container">
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.profile.user_group != 'FL' %}
 	<div class="panel panel-default">
         <div class="panel-body registration-panel">
 			<div id="legend">
@@ -20,6 +20,8 @@
 			</form>
 		</div>
 	</div>
+{% elif user.profile.user_group == 'FL' %}
+    <h3>Sorry, your user group is <u>Follower</u>. You could not add posts.</h3>
 {% else %}
     <h3>You should Login or <a href="{% url 'blogpost:register' %}">Signup</a> to view this page</h3>
 {% endif %}
