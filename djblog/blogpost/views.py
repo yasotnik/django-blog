@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Post, Category, BlogSettings, Profile
+from .models import Post, Category, BlogSettings, Profile, Comment
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, RedirectView, CreateView
@@ -17,15 +17,27 @@ class PostsView(generic.ListView):
         return context
 
 
-class PostDetailView(generic.DetailView):
-    model = Post
+class PostDetailView(View):
     template_name = 'blogpost/post.html'
+    form_class = CommentForm
 
-    def get_context_data(self, **kwargs):
-        form = CommentForm()
-        context = super(PostDetailView, self).get_context_data(**kwargs)
-        context['blog'] = BlogSettings.objects.all()[0]
-        return context
+    def get(self, request, slug):
+        form = self.form_class(None)
+        blog = BlogSettings.objects.all()[0]
+        post = Post.objects.filter(slug=slug)[0]
+        comments = Comment.objects.filter(post=post)
+        return render(request, self.template_name, {'blog': blog, 'post': post, 'form': form, 'comments': comments})
+
+    def post(self, request, slug):
+        form = self.form_class(request.POST)
+        blog = BlogSettings.objects.all()[0]
+        if form.is_valid():
+            comment = form.save(commit=False)
+            blog_post = Post.objects.filter(slug=slug)[0]
+            comment.post = blog_post
+            comment.user = request.user
+            comment.save()
+            return redirect('blogpost:post', slug)
 
 
 class CategoryDetailView(View):

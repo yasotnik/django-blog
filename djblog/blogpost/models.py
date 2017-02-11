@@ -92,6 +92,6 @@ class Profile(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
-    profile = models.ForeignKey(Profile)
+    user = models.ForeignKey(User)
+    posted = models.DateTimeField(db_index=True, auto_now_add=True)
     text = models.TextField(max_length=200)
-    user = models.OneToOneField(User)
