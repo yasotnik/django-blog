@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404, render_to_resp
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, RedirectView, CreateView
 from .forms import UserForm, ProfileForm, PostForm, CommentForm
-
+from django.template.defaultfilters import slugify
 
 class PostsView(generic.ListView):
     template_name = 'blogpost/index.html'
@@ -30,7 +30,6 @@ class PostDetailView(View):
 
     def post(self, request, slug):
         form = self.form_class(request.POST)
-        blog = BlogSettings.objects.all()[0]
         if form.is_valid():
             comment = form.save(commit=False)
             blog_post = Post.objects.filter(slug=slug)[0]
@@ -130,13 +129,10 @@ class ProfileUpdate(View):
     # update profile
     def post(self, request):
         form = self.form_class(request.POST, instance=request.user.profile)
-        blog = BlogSettings.objects.all()[0]
+        slug = slugify(request.user.username)
         if form.is_valid():
-            avatar = form.cleaned_data['avatar']
-            facebook = form.cleaned_data['facebook']
-            twitter = form.cleaned_data['twitter']
             form.save()
-            return redirect('blogpost:index')
+            return redirect('blogpost:profile', slug)
 
 
 class AddPostView(View):
@@ -152,7 +148,6 @@ class AddPostView(View):
     # update profile
     def post(self, request):
         form = PostForm(request.POST)
-        blog = BlogSettings.objects.all()[0]
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
