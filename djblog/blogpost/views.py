@@ -6,6 +6,7 @@ from django.views.generic import View, RedirectView, CreateView
 from .forms import UserForm, ProfileForm, PostForm, CommentForm
 from django.template.defaultfilters import slugify
 
+
 class PostsView(generic.ListView):
     template_name = 'blogpost/index.html'
 
@@ -105,14 +106,16 @@ class LogoutView(RedirectView):
         return redirect('blogpost:index')
 
 
-class ProfileView(generic.DetailView):
+class ProfileView(View):
     model = Profile
     template_name = 'blogpost/profile.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        context['blog'] = BlogSettings.objects.all()[0]
-        return context
+    def get(self, request, slug):
+        profile = Profile.objects.get(slug=slug)
+        print('DEBUG:' + slug)
+        blog = BlogSettings.objects.all()[0]
+        posts = Post.objects.filter(author=profile.user.pk)
+        return render(request, self.template_name, {'blog': blog, 'profile': profile, 'posts': posts})
 
 
 class ProfileUpdate(View):

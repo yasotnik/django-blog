@@ -3,11 +3,41 @@
     <div class="container">
         <div class="span3 well">
             <center>
-            <img src="{{ profile.avatar }}" name="aboutme" width="140" height="140" class="img-circle">
-            <h3>{{ profile.username }}<small>{{ profile.user_group }}</small></h3>
-            <i class="fa fa-facebook-official" aria-hidden="true"></i>{{ profile.facebook }}
-            <i class="fa fa-twitter" aria-hidden="true"></i>{{ profile.twitter }}
+                <img src="{{ profile.avatar }}" name="aboutme" width="140" height="140" class="img-circle">
+                <h3>{{ profile.username }}<small>{{ profile.user_group }}</small></h3>
+                <i class="fa fa-facebook-official" aria-hidden="true"></i>{{ profile.facebook }}
+                <i class="fa fa-twitter" aria-hidden="true"></i>{{ profile.twitter }}
             </center>
         </div>
+<div class="posts col-lg-12 col-xs-12 col-md-12">
+		{% for post in posts %}
+		<div class="post col-lg-6 col-sm-12 col-xs-12 col-md-5">
+			<div class="heading">
+				<div>
+					<h3>
+						{{ post.title }}
+						<small class="title"><span class="glyphicon glyphicon-tag"></span><a
+							href="{% url 'blogpost:category_view' post.category.slug %}">{{ post.category }}</a></small>
+						<small class="author pull-right"><span class="glyphicon glyphicon-user"></span><a
+							href="{% url 'blogpost:profile' post.author %}">{{ post.author }}</a></small>
+					</h3>
+				</div>
+			</div>
+			<div class="image-container">
+				<img src="{{ post.image }}" class="image">
+			</div>
+			<div class="preview">
+				<p>{{ post.body_preview }}</p>
+			</div>
+			<div class="bottom">
+				<div class="date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
+				<div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="read btn
+					btn-info">Read</a></div>
+			</div>
+		</div>
+		{% empty %}
+		<h3>No posts yet.</h3>
+		{% endfor %}
+	</div>
     </div>
 {% endblock %}

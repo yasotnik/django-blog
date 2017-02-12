@@ -40,7 +40,10 @@
             </ul>
         {% endfor %}
 
-
+        <div class="col-lg-2">
+            <img src="{{ user.profile.avatar }}" name="aboutme" width="100" height="100" class="img-circle">
+        </div>
+        <div class="col-lg-10">
 			<form class="form-horizontal " action="" method="post"
 				enctype="multipart/form-data">
 				{%  csrf_token %}
@@ -52,6 +55,8 @@
 					</div>
 				</div>
 			</form>
+        </div>
+
 
 </div>
 
