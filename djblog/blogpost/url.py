@@ -33,4 +33,7 @@ urlpatterns = [
     # URL for posts
     url(r'^category/(?P<slug>[^\.]+)/$', views.CategoryDetailView.as_view(), name='category_view'),
 
+    # URL for posts
+    url(r'^post/(?P<slug>[^\.]+)/delete_comment/(?P<pk>[0-9]+)$', views.CommentDelete.as_view(), name='comment_delete'),
+
 ]

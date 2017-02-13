@@ -184,3 +184,7 @@ body {
 .media-comment { margin-bottom: 20px; }
 .media-replied { margin: 0 0 20px 50px; }
 .media-replied .media-heading { padding-left: 6px; }
+.comment-delete {
+    margin-bottom: 10px;
+    height: 20px;
+}

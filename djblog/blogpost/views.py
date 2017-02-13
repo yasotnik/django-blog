@@ -1,8 +1,9 @@
+from django.urls import reverse_lazy
 from django.views import generic
 from .models import Post, Category, BlogSettings, Profile, Comment
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View, RedirectView, CreateView
+from django.views.generic import View, RedirectView, CreateView, DeleteView
 from .forms import UserForm, ProfileForm, PostForm, CommentForm
 from django.template.defaultfilters import slugify
 
@@ -148,7 +149,7 @@ class AddPostView(View):
         blog = BlogSettings.objects.all()[0]
         return render(request, self.template_name, {'form': form, 'blog': blog})
 
-    # update profile
+    # update post
     def post(self, request):
         form = PostForm(request.POST)
         if form.is_valid():
@@ -156,3 +157,12 @@ class AddPostView(View):
             post.author = request.user
             post.save()
             return redirect('blogpost:index')
+
+
+class CommentDelete(View):
+
+    def post(self, request, slug, pk):
+        cmnt = Comment.objects.get(pk=pk)
+        cmnt.delete()
+
+        return redirect('blogpost:post', slug)
