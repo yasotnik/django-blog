@@ -28,7 +28,9 @@ def get_env_variable(var_name):
 SECRET_KEY = get_env_variable('SECRET_KEY')
 # DB_PASSWORD variable stored in environment
 DB_PASSWORD = get_env_variable('DB_PASSWORD')
-
+DB_USER = get_env_variable('DB_USER')
+DB_HOST = get_env_variable('DB_HOST')
+DB_DATABASE = get_env_variable('DB_DB')
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -107,10 +109,10 @@ WSGI_APPLICATION = 'djblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangoblog',
-        'USER': 'blogadmin',
+        'NAME': DB_DATABASE,
+        'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': '127.0.0.1',
+        'HOST': DB_HOST,
         'PORT': '5432',
     }
 }

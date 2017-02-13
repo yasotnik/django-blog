@@ -39,7 +39,7 @@ body {
     width: 100%;
     height: auto;
     max-height: 300px;
-    min-height: 300px;
+    /*min-height: 300px;*/
 }
 .post .bottom {
     line-height: 38px;

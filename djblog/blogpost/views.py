@@ -149,14 +149,14 @@ class AddPostView(View):
         blog = BlogSettings.objects.all()[0]
         return render(request, self.template_name, {'form': form, 'blog': blog})
 
-    # update post
+    # Add post
     def post(self, request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blogpost:index')
+            return redirect('blogpost:post', post.slug)
 
 
 class CommentDelete(View):
