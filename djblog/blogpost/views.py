@@ -174,8 +174,11 @@ class CommentDelete(View):
     def post(self, request, slug, pk):
         cmnt = Comment.objects.get(pk=pk)
         cmnt.delete()
-
-        return redirect('blogpost:post', slug)
+        print('debug' + request.path)
+        if request.path != '/admin_panel/':
+            return redirect('blogpost:post', slug)
+        else:
+            return redirect('blogpost:admin_view')
 
 
 class PostDelete(View):
@@ -192,4 +195,5 @@ class AdminView(View):
     def get(self, request):
         blog = BlogSettings.objects.all()[0]
         posts = Post.objects.all()
-        return render(request, self.template_name, {'blog': blog, 'posts': posts})
+        comments = Comment.objects.all()
+        return render(request, self.template_name, {'blog': blog, 'posts': posts, 'comments': comments})

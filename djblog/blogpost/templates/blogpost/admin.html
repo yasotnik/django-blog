@@ -6,14 +6,14 @@
             <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1default" data-toggle="tab">Posts</a></li>
-                            <li><a href="#tab2default" data-toggle="tab">Comments</a></li>
+                            <li class="active"><a href="#PostsTab" data-toggle="tab">Posts</a></li>
+                            <li><a href="#CommentsTab" data-toggle="tab">Comments</a></li>
                             <li><a href="#tab3default" data-toggle="tab">Profiles</a></li>
                         </ul>
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1default">
+                        <div class="tab-pane fade in active" id="PostsTab">
                         <table class="table table-striped custab">
                             <thead>
 {#                            <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>#}
@@ -53,7 +53,34 @@
 
 
                         </div>
-                        <div class="tab-pane fade" id="tab2default">Default 2</div>
+                        <div class="tab-pane fade" id="CommentsTab">
+                            <table class="table table-striped custab">
+                                <thead>
+                                    <tr>
+                                        <th>Author</th>
+                                        <th>Comment</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                {% for comment in comments %}
+                                    <tr>
+                                        <td class="col-md-2">{{ comment.user.username }}</td>
+                                        <td class="col-md-8">{{ comment.text }}</td>
+                                        <td class="col-md-2 text-center">
+                                            <form action="
+                                            {%  url 'blogpost:comment_delete' slug=comment.post.slug pk=comment.pk %}"
+                                                  method="POST">
+                                            {% csrf_token %}
+                                            <label>
+                                                <button type="submit" class="btn btn-small btn-danger">
+                                                Del.</button>
+                                            </label>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
                         <div class="tab-pane fade" id="tab3default">Default 3</div>
                     </div>
                 </div>
