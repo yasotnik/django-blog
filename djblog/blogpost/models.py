@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 
 class BlogSettings(models.Model):
@@ -28,12 +29,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    @permalink
     def get_absolute_url(self):
-        return ('post', (),
-                {
-                    'slug': self.slug,
-                })
+        return reverse('blogpost:post', args=[self.slug])
 
     def save(self, *args, **kwargs):
             self.slug = slugify(self.title)
@@ -56,9 +53,11 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     FOLLOWER = 'FL'
     WRITER = 'WR'
+    ADMIN = 'AD'
     USER_GROUP = (
         (FOLLOWER, 'Follower'),
         (WRITER, 'Writer'),
+        (ADMIN, 'Admin'),
     )
     user_group = models.CharField(max_length=2, choices=USER_GROUP, default=FOLLOWER)
     username = models.CharField(max_length=30, blank=True)

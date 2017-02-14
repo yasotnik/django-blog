@@ -3,7 +3,7 @@ from django.views import generic
 from .models import Post, Category, BlogSettings, Profile, Comment
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View, RedirectView, CreateView, DeleteView
+from django.views.generic import View, RedirectView, CreateView, DeleteView, UpdateView
 from .forms import UserForm, ProfileForm, PostForm, CommentForm
 from django.template.defaultfilters import slugify
 
@@ -157,6 +157,16 @@ class AddPostView(View):
             post.author = request.user
             post.save()
             return redirect('blogpost:index')
+
+
+class UpdatePost(UpdateView):
+    model = Post
+    fields = ['title', 'category', 'image', 'body_preview', 'body']
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdatePost, self).get_context_data(**kwargs)
+        context['blog'] = BlogSettings.objects.all()[0]
+        return context
 
 
 class CommentDelete(View):
