@@ -26,7 +26,7 @@ class PostDetailView(View):
     def get(self, request, slug):
         form = self.form_class(None)
         blog = BlogSettings.objects.all()[0]
-        post = Post.objects.filter(slug=slug)[0]
+        post = Post.objects.get(slug=slug)
         comments = Comment.objects.filter(post=post)
         return render(request, self.template_name, {'blog': blog, 'post': post, 'form': form, 'comments': comments})
 
@@ -176,3 +176,20 @@ class CommentDelete(View):
         cmnt.delete()
 
         return redirect('blogpost:post', slug)
+
+
+class PostDelete(View):
+
+    def post(self, request, slug):
+        pst = Post.objects.get(slug=slug)
+        pst.delete()
+        return redirect('blogpost:admin_view')
+
+
+class AdminView(View):
+    template_name = 'blogpost/admin.html'
+
+    def get(self, request):
+        blog = BlogSettings.objects.all()[0]
+        posts = Post.objects.all()
+        return render(request, self.template_name, {'blog': blog, 'posts': posts})

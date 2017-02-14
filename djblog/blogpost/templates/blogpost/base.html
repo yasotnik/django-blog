@@ -39,10 +39,11 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><b>{{ user.username }}</b><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-                        {% if user.profile.user_group == 'WR' %}
+                        {% if user.profile.user_group == 'WR' or user.profile.user_group == 'AD' %}
 						    <li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
-                        {% elif user.profile.user_group == 'AD' %}
-                            <li><a href="#">Admin panel</a></li>
+                            <li><a href="{% url 'blogpost:admin_view' %}">Admin panel</a></li>
+                        {% elif user.profile.user_group == 'WR' %}
+                            <li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
                         {% endif %}
 						<li><a href="{% url 'blogpost:profile_edit' %}">Profile</a></li>
 						<li role="separator" class="divider"></li>

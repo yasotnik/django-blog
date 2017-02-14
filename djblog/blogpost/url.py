@@ -21,6 +21,9 @@ urlpatterns = [
     # URL for updating a post
     url(r'post_update/(?P<slug>[^\.]+)/$', views.UpdatePost.as_view(), name='update_post'),
 
+    # URL for post delete
+    url(r'post_delete/(?P<slug>[^\.]+)/$', views.PostDelete.as_view(), name='delete_post'),
+
     # Login
     url(r'^login/$', views.LoginView.as_view(), name='login_user'),
 
@@ -36,7 +39,10 @@ urlpatterns = [
     # URL for category
     url(r'^category/(?P<slug>[^\.]+)/$', views.CategoryDetailView.as_view(), name='category_view'),
 
-    # URL for posts
+    # URL for comment delete
     url(r'^post/(?P<slug>[^\.]+)/delete_comment/(?P<pk>[0-9]+)$', views.CommentDelete.as_view(), name='comment_delete'),
+
+    # URL for admin page
+    url(r'^admin_panel/$', views.AdminView.as_view(), name='admin_view'),
 
 ]
