@@ -195,5 +195,8 @@ class AdminView(View):
     def get(self, request):
         blog = BlogSettings.objects.all()[0]
         posts = Post.objects.all()
+        profiles = Profile.objects.all()
         comments = Comment.objects.all()
-        return render(request, self.template_name, {'blog': blog, 'posts': posts, 'comments': comments})
+        return render(request, self.template_name, {'blog': blog, 'posts': posts, 'comments': comments,
+                                                    'profiles': profiles})
+
