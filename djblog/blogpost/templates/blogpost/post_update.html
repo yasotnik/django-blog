@@ -1,0 +1,29 @@
+{% extends "blogpost/base.html" %}
+{% block content %}
+<div class="container">
+{% if user.is_authenticated and user.profile.user_group != 'FL' %}
+	<div class="panel panel-default">
+        <div class="panel-body registration-panel">
+			<div id="legend">
+				<legend class="">Update post</legend>
+			</div>
+			<form class="form-horizontal" action="" method="post"
+				enctype="multipart/form-data">
+				{%  csrf_token %}
+				{% include 'blogpost/form-template.html' %}
+				<div class="control-group">
+					<!-- Button -->
+					<div class="controls registration-button">
+						<button class="btn btn-success">Update</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% elif user.profile.user_group == 'FL' %}
+    <h3>Sorry, your user group is <u>Follower</u>. You could not update posts.</h3>
+{% else %}
+    <h3>You should Login or <a href="{% url 'blogpost:register' %}">Signup</a> to view this page</h3>
+{% endif %}
+</div>
+{% endblock content %}

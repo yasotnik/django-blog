@@ -20,6 +20,7 @@
 									<tr>
 										<th>Title</th>
 										<th>Author</th>
+                                        <th>Posted</th>
 										<th>Category</th>
 										<th class="text-center">Preview</th>
 										<th class="text-center">Action</th>
@@ -27,11 +28,16 @@
 								</thead>
 								{% for post in posts %}
 								<tr>
-									<td class="col-md-2">{{ post.title }}</td>
-									<td class="col-md-1">{{ post.author }}</td>
-									<td class="col-md-2">{{ post.category }}</td>
+									<td class="col-md-2"><a href="{% url 'blogpost:post' post.slug %}">{{ post.title }}</a> </td>
+									<td class="col-md-1">
+                                        <a href="{% url 'blogpost:profile' post.author %}">{{ post.author }}</a>
+                                    </td>
+                                    <td class="col-md-2">{{ post.posted|date:"d.m.y" }}
+                                        {{ post.posted|time:"H:i" }}</td>
+									<td class="col-md-1"><a href="{% url 'blogpost:category_view' post.category.slug %}">{{ post.category }}
+                                    </a></td>
 									<td class="col-md-5">{{ post.body_preview }}</td>
-									<td class="text-center col-md-2">
+									<td class="text-center col-md-1">
 										<a class='btn btn-small btn-success' href="{%  url 'blogpost:update_post' slug=post.slug %}">
 										Edit
 										</a>
@@ -53,15 +59,20 @@
 								<thead>
 									<tr>
 										<th>Author</th>
+                                        <th>Post</th>
 										<th>Comment</th>
 										<th class="text-center">Action</th>
 									</tr>
 								</thead>
 								{% for comment in comments %}
 								<tr>
-									<td class="col-md-2">{{ comment.user.username }}</td>
-									<td class="col-md-8">{{ comment.text }}</td>
-									<td class="col-md-2 text-center">
+									<td class="col-md-2">
+                                        <a href="{% url 'blogpost:profile' comment.user.username %}">{{ comment.user.username }}</a>
+                                    </td>
+                                    <td class="col-md-2"><a href="{% url 'blogpost:post' comment.post.slug %}"
+                                    >{{ comment.post.title }}</a></td>
+									<td class="col-md-7">{{ comment.text }}</td>
+									<td class="col-md-1 text-center">
 										<form action="
 											{%  url 'blogpost:comment_delete' slug=comment.post.slug pk=comment.pk %}"
 											method="POST">
@@ -89,8 +100,9 @@
 								{% for profile in profiles %}
 								<tr>
 									<td class="col-md-1">{{ profile.username }}</td>
-									<td class="col-md-1">{{ profile.user_group}}</td>
-									<td class="col-md-10 text-center">
+									<td class="col-md-2">{{ profile.user_group}}</td>
+                                    <td class="col-md-2">{{ profile.email }}</td>
+									<td class="col-md-1 text-center">
 										<form action=""
 											method="POST">
 											{% csrf_token %}

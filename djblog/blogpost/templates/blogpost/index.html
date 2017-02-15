@@ -6,7 +6,7 @@
 		<p>{{ blog.description }}</p>
 	</div>
 
-    <div class="row col-lg-12 col-xs-12 col-md-12">
+    <div class="row col-lg-12 col-xs-12 col-md-12 row-eq-height">
 	    <div class="posts ">
             {% for post in object_list %}
                 <div class="post col-lg-6 col-sm-12 col-xs-12 col-md-6">
@@ -28,7 +28,10 @@
                         <p>{{ post.body_preview }}</p>
                     </div>
                     <div class="bottom">
-                        <div class="date pull-left">{{ post.posted|date:"d-m-Y" }}</div>
+                        <div class="date pull-left">
+                            {{ post.posted|date:"d.m.y" }}
+                            {{ post.posted|time:"H:i" }}
+                        </div>
                         <div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="read btn
                             btn-info">Read</a></div>
                     </div>

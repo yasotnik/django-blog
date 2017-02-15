@@ -11,7 +11,7 @@ from django.template.defaultfilters import slugify
 class PostsView(generic.ListView):
     template_name = 'blogpost/index.html'
 
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-posted')
 
     def get_context_data(self, **kwargs):
         context = super(PostsView, self).get_context_data(**kwargs)
@@ -163,6 +163,7 @@ class AddPostView(View):
 
 class UpdatePost(UpdateView):
     model = Post
+    template_name = 'blogpost/post_update.html'
     fields = ['title', 'category', 'image', 'body_preview', 'body']
 
     def get_context_data(self, **kwargs):
@@ -177,10 +178,7 @@ class CommentDelete(View):
         cmnt = Comment.objects.get(pk=pk)
         cmnt.delete()
         print('debug' + request.path)
-        if request.path != '/admin_panel/':
-            return redirect('blogpost:post', slug)
-        else:
-            return redirect('blogpost:admin_view')
+        return redirect('blogpost:post', slug)
 
 
 class PostDelete(View):
