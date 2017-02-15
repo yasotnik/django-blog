@@ -153,10 +153,12 @@ class AddPostView(View):
     def post(self, request):
         form = PostForm(request.POST)
         if form.is_valid():
+            print('Debug: ' + request.POST['title'])
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blogpost:index')
+            slug = post.slug
+            return redirect('blogpost:post', slug)
 
 
 class UpdatePost(UpdateView):

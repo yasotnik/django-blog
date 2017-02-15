@@ -13,6 +13,9 @@ body {
 
 /*Post style*/
 
+.post {
+    /*max-height: 439px;*/
+}
 .post .title{
     margin-left: 10px;
 }
@@ -37,9 +40,10 @@ body {
 }
 .post .image {
     width: 100%;
-    height: auto;
-    max-height: 300px;
+    /*height: auto;*/
     min-height: 300px;
+    max-height: 300px;
+
 }
 .post .bottom {
     line-height: 38px;
