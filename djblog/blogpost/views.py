@@ -4,7 +4,7 @@ from .models import Post, Category, BlogSettings, Profile, Comment
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, RedirectView, CreateView, DeleteView, UpdateView
-from .forms import UserForm, ProfileForm, PostForm, CommentForm
+from .forms import UserForm, ProfileForm, PostForm, CommentForm, ProfileAdminForm
 from django.template.defaultfilters import slugify
 
 
@@ -97,7 +97,6 @@ class LoginView(RedirectView):
             else:
                 print('No user')
                 return redirect('blogpost:index')
-        print('Shit')
         return redirect('blogpost:index')
 
 
@@ -200,3 +199,21 @@ class AdminView(View):
         return render(request, self.template_name, {'blog': blog, 'posts': posts, 'comments': comments,
                                                     'profiles': profiles})
 
+
+class AdminEditGroup(View):
+    form_class = ProfileAdminForm
+    template_name = 'blogpost/admin_profile_form.html'
+
+    # display blank form
+    def get(self, request, user):
+        form = self.form_class(None)
+        blog = BlogSettings.objects.all()[0]
+        return render(request, self.template_name, {'form': form, 'blog': blog})
+
+    # update profile
+    def post(self, request, user):
+        usr = Profile.objects.get(username=user)
+        form = self.form_class(request.POST, instance=usr)
+        if form.is_valid():
+            form.save()
+            return redirect('blogpost:admin_view')

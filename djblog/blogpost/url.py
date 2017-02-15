@@ -45,4 +45,7 @@ urlpatterns = [
     # URL for admin page
     url(r'^admin_panel/$', views.AdminView.as_view(), name='admin_view'),
 
+    # URL for admin page
+    url(r'^admin_panel/(?P<user>[^\.]+)/change_group$', views.AdminEditGroup.as_view(), name='change_group'),
+
 ]

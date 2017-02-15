@@ -20,6 +20,14 @@ class ProfileForm(forms.ModelForm):
         exclude = ['user', 'slug', 'user_group', 'username']
 
 
+class ProfileAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        # exclude = ['user', 'slug', 'username']
+        fields = ['user_group']
+
+
 class PostForm(forms.ModelForm):
 
     class Meta:
