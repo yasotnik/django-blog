@@ -45,8 +45,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.0.101',
-    '127.0.0.1',
+    'django-blog-cms.herokuapp.com',
 ]
 
 
