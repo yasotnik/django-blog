@@ -88,8 +88,8 @@ body {
         min-width: 270px;
 }
 .registration-panel {
-    margin: 0 auto;
-    width: 270px;
+    /*margin: 0 auto;*/
+    /*width: 500px;*/
 }
 #legend {
     width: 270px;

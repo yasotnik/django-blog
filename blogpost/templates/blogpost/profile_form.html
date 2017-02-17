@@ -2,24 +2,65 @@
 {% block content %}
 <div class="container">
 {% if user.is_authenticated %}
+    <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-10 col-sm-offset-2 col-md-offset-2 col-lg-offset-1">
 	<div class="panel panel-default">
         <div class="panel-body registration-panel">
-			<div id="legend">
-				<legend class="">Edit {{ user.username }}'s Profile</legend>
+			<div class="panel-heading">
+				<h2 class="">Edit {{ user.username }}'s Profile</h2>
 			</div>
-			<form class="form-horizontal" action="" method="post"
-				enctype="multipart/form-data">
-				{%  csrf_token %}
-				{% include 'blogpost/form-template.html' %}
-				<div class="control-group">
-					<!-- Button -->
-					<div class="controls registration-button">
-						<button class="btn btn-success">Update profile</button>
-					</div>
-				</div>
-			</form>
-		</div>
+            <div class="panel-body ">
+                <form action="/profile_edit/" method="post" role="form" >
+                    {%  csrf_token %}
+                    <div class="form-group">
+			    		<label for="avatar_id">Avatar image URL:</label>
+                        <input id="avatar_id" class="form-control " type="text" name="avatar" value="{{ current_avatar }}" placeholder="Image URL...">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="facebook_id">Facebook link:</label>
+                                <input id="facebook_id" class="form-control " type="text" name="facebook" value=
+                                        "{{ current_fb }}"
+                                placeholder="Facebook link URL...">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="twitter_id">Twitter link:</label>
+                                <input id="twitter_id" class="form-control " type="text" name="twitter" value=
+                                        "{{ current_tw }}"
+                                placeholder="Twitter link URL...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="github_id">Github link:</label>
+                                <input id="github_id" class="form-control " type="text" name="github" value=
+                                        "{{ current_git }}"
+                                placeholder="Github link URL...">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="email_id">Email:</label>
+                                <input id="email_id" class="form-control " type="email" name="email" value=
+                                        "{{ current_email}}"
+                                placeholder="Email@site.com...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Update" class="btn btn-info btn-block">
+
+                </form>
+            </div>
+        </div>
 	</div>
+    </div>
+    </div>
 {% else %}
     <h3>You should Login or <a href="{% url 'blogpost:register' %}">Signup</a> to view this page</h3>
 {% endif %}

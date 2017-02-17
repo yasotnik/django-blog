@@ -112,7 +112,6 @@ class ProfileView(View):
 
     def get(self, request, slug):
         profile = Profile.objects.get(slug=slug)
-        print('DEBUG:' + slug)
         blog = BlogSettings.objects.all()[0]
         posts = Post.objects.filter(author=profile.user.pk)
         return render(request, self.template_name, {'blog': blog, 'profile': profile, 'posts': posts})
