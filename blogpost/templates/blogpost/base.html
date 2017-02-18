@@ -1,9 +1,16 @@
 {# Load the tag library #}
 {% load bootstrap3 %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+{# Bootstrap selector #}
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" rel="stylesheet">
+{# TinyMCE #}
+<script src="//cloud.tinymce.com/stable/tinymce.min.js?apiKey=48i7v3kwhg4jefwbpntg5zeqf2ziedn4yw4zsqjsmw874c4c"></script>
+<script>tinymce.init({
+        selector:'#id_body',
+        menubar: false,  // removes the menubar
+    });
+</script>
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
