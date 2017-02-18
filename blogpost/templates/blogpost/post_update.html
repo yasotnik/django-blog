@@ -3,47 +3,48 @@
 <div class="container">
 {% if user.is_authenticated and user.profile.user_group != 'FL' %}
 	<div class="panel panel-default">
-        <div class="panel-body registration-panel">
-        <div class="panel-body registration-panel">
+		<div class="panel-body registration-panel">
 			<div class="panel-heading">
-				<h2 class="">Update post</h2>
+				<h2 class="">Add new post</h2>
 			</div>
-            <div class="panel-body ">
-                <form class="form-horizontal" action="" method="post"
+			<div class="panel-body ">
+				<form class="" action="" method="post"
                     enctype="multipart/form-data">
                     {%  csrf_token %}
-                    <div class="form-group">
-                        <label for="id_title">Title:</label>
-                        <input id="id_title" class="form-control " type="text" name="title" value="" placeholder="Post title...">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_category">Category:</label>
-                        <select id="id_category" name="category" class="selectpicker" data-width="100%" required>
+
+					<div class="form-group">
+						<label for="id_title">Title:</label>
+						<input id="id_title" class="form-control " type="text" name="title" value="" placeholder="Post title...">
+						</div>
+						<div class="form-group">
+							<label for="id_category">Category:</label>
+							<select id="id_category" name="category" class="selectpicker" data-width="100%" required>
                             {% for instance in form.categories.field.queryset %}
-                                <option value="{{ instance.pk }}">{{ instance.title }}</option>
+
+								<option value="{{ instance.pk }}">{{ instance.title }}</option>
                             {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_image">Image URL:</label>
-                        <input id="id_image" class="form-control " type="url" name="image" value="" >
-                    </div>
-                    <div class="form-group">
-                        <label for="id_body_preview">Post preview text:</label>
-                        <textarea id="id_body_preview" class="form-control " type="" name="body_preview" placeholder=""></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_body">Post text:</label>
-                        <textarea id="id_body" class="form-control " type="" name="body" placeholder=""></textarea>
-                    </div>
 
-                    <input type="submit" value="Add post" class="btn btn-success col-lg-12">
-
-                </form>
-		</div>
-        </div>
-        </div>
-	</div>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="id_image">Image URL:</label>
+							<input id="id_image" class="form-control " type="url" name="image" value="" >
+							</div>
+							<div class="form-group">
+								<label for="id_body_preview">Post preview text:</label>
+								<textarea id="id_body_preview" class="form-control " type="" name="body_preview" placeholder=""></textarea>
+							</div>
+							<div class="form-group">
+								<label for="id_body">Post text:</label>
+								<textarea id="id_body" class="form-control " type="" name="body" placeholder=""></textarea>
+							</div>
+							<input type="submit" value="Add comment" class="btn btn-success col-lg-12 col-md-12 col-sm-12
+                    col-xs-12">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 {% elif user.profile.user_group == 'FL' %}
     <h3>Sorry, your user group is <u>Follower</u>. You could not update posts.</h3>
 {% else %}
