@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Profile, Post, Comment
+from .models import Profile, Post, Comment, Category
 from django import forms
 
 
@@ -29,6 +29,8 @@ class ProfileAdminForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
+
+    categories = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
 
     class Meta:
         model = Post

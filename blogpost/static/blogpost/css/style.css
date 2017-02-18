@@ -59,6 +59,11 @@ body {
   /* Set the fixed height of the footer here */
   background-color: #f5f5f5;
 }
+/* Post adding form */
+
+#id_body {
+    min-height: 200px;
+}
 
 /*Registration style*/
 

@@ -157,6 +157,12 @@ class AddPostView(View):
             post.save()
             slug = post.slug
             return redirect('blogpost:post', slug)
+        else:
+            print(form.errors.as_data())
+            print('Debug: ' + request.POST['category'])
+            form = PostForm()
+            print('DEBUG ' + str(form.is_valid()))
+            return render(request, self.template_name, {'form': form})
 
 
 class UpdatePost(UpdateView):
