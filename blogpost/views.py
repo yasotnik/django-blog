@@ -125,8 +125,9 @@ class ProfileUpdate(View):
     # display blank form
     def get(self, request):
         form = self.form_class(None)
+        profile = Profile.objects.get(user=request.user)
         blog = BlogSettings.objects.all()[0]
-        return render(request, self.template_name, {'form': form, 'blog': blog})
+        return render(request, self.template_name, {'form': form, 'blog': blog, 'initial': profile})
 
     # update profile
     def post(self, request):
@@ -173,6 +174,9 @@ class UpdatePost(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdatePost, self).get_context_data(**kwargs)
         context['blog'] = BlogSettings.objects.all()[0]
+        pst_data = Post.objects.get(title=context['post'])
+        context['initial'] = pst_data
+        context['categories'] = Category.objects.all()
         return context
 
 
