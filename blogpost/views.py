@@ -148,7 +148,7 @@ class AddPostView(View):
         ctgs = Category.objects.all()
         return render(request, self.template_name, {'form': form, 'blog': blog, 'ctgs': ctgs})
 
-    # update post
+    # add post
     def post(self, request):
         form = PostForm(request.POST)
         if form.is_valid():
@@ -159,11 +159,12 @@ class AddPostView(View):
             slug = post.slug
             return redirect('blogpost:post', slug)
         else:
-            print(form.errors.as_data())
+            print(form.errors)
             print('Debug: ' + request.POST['category'])
-            form = PostForm()
             print('DEBUG ' + str(form.is_valid()))
-            return render(request, self.template_name, {'form': form})
+            blog = BlogSettings.objects.all()[0]
+            ctgs = Category.objects.all()
+            return render(request, self.template_name, {'form': form, 'blog': blog, 'ctgs': ctgs})
 
 
 class AddCategory(CreateView):
@@ -183,8 +184,9 @@ class AddCategory(CreateView):
             print('Name:' + request.POST['title'])
             return redirect('blogpost:admin_view')
         else:
-            print(form.errors.as_data())
-            return redirect('blogpost:add_category')
+            print(form.errors)
+            blog = BlogSettings.objects.all()[0]
+            return render(request, self.template_name, {'form': form, 'blog': blog})
 
 
 class UpdatePost(UpdateView):

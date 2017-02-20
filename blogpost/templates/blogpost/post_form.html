@@ -13,34 +13,36 @@
 				<form class="" action="" method="post"
                     enctype="multipart/form-data">
                     {%  csrf_token %}
-
 					<div class="form-group">
 						<label for="id_title">Title:</label>
 						<input id="id_title" class="form-control " type="text" name="title" value="" placeholder="Post title...">
-						</div>
-						<div class="form-group">
-							<label for="id_category">Category:</label>
-							<select id="id_category" name="category" class="selectpicker" data-width="100%" required>
-                            {% for ctg in ctgs %}
+                        <span class="input-error">{{ form.title.errors }}</span>
+                    </div>
+					<div class="form-group">
+						<label for="id_category">Category:</label>
+						<select id="id_category" name="category" class="selectpicker" data-width="100%" required>
+                        {% for ctg in ctgs %}
+                            <option value="{{ ctg.pk }}">{{ ctg.title }}</option>
+                        {% endfor %}
 
-								<option value="{{ ctg.pk }}">{{ ctg.title }}</option>
-                            {% endfor %}
-
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="id_image">Image URL:</label>
-							<input id="id_image" class="form-control " type="url" name="image" value="" >
-							</div>
-							<div class="form-group">
-								<label for="id_body_preview">Post preview text:</label>
-								<textarea id="id_body_preview" class="form-control " type="" name="body_preview" placeholder=""></textarea>
-							</div>
-							<div class="form-group">
-								<label for="id_body">Post text:</label>
-								<textarea id="id_body" class="form-control " type="" name="body" placeholder=""></textarea>
-							</div>
-							<input type="submit" value="Add post" class="btn btn-success col-lg-12 col-md-12 col-sm-12
+                        </select>
+                    </div>
+					<div class="form-group">
+						<label for="id_image">Image URL:</label>
+						<input id="id_image" class="form-control " type="url" name="image" value="" >
+                        <span class="input-error">{{ form.image.errors.as_text }}</span>
+                    </div>
+                    <div class="form-group">
+						<label for="id_body_preview">Post preview text:</label>
+						<textarea id="id_body_preview" class="form-control " type="" name="body_preview" placeholder=""></textarea>
+                        <span class="input-error">{{ form.body_preview.errors.as_text }}</span>
+                    </div>
+					<div class="form-group">
+						<label for="id_body">Post text:</label>
+						<textarea id="id_body" class="form-control " type="" name="body" placeholder=""></textarea>
+                        <span class="input-error">{{ form.body.errors.as_text }}</span>
+					</div>
+					<input type="submit" value="Add post" class="btn btn-success col-lg-12 col-md-12 col-sm-12
                     col-xs-12">
 							</form>
 						</div>

@@ -204,3 +204,8 @@ body {
 .img-circle {
     margin-bottom: 10px;
 }
+
+.input-error {
+    color: #850415;
+    margin-bottom: 10px;
+}
