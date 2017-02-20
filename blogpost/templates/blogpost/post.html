@@ -6,7 +6,7 @@
     <div class="jumbotron">
         <h1>{{ post.title }}</h1>
         <p>{{ post.body_preview }}...</p>
-        {% if post.author == user %}
+        {% if post.author == user or user.profile.user_group == 'AD' %}
             <a href="{%  url 'blogpost:update_post' slug=post.slug %}">
                 <button class="btn btn-warning">Update</button>
             </a>
