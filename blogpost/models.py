@@ -48,6 +48,10 @@ class Category(models.Model):
     def get_absolute_url(self):
         return 'view_blog_category', None, {'slug': self.slug}
 
+    def save(self, *args, **kwargs):
+            self.slug = slugify(self.title)
+            super(Category, self).save(*args, **kwargs)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

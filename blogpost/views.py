@@ -1,10 +1,9 @@
-from django.urls import reverse_lazy
 from django.views import generic
 from .models import Post, Category, BlogSettings, Profile, Comment
-from django.shortcuts import render, redirect, get_object_or_404, render_to_response
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View, RedirectView, CreateView, DeleteView, UpdateView
-from .forms import UserForm, ProfileForm, PostForm, CommentForm, ProfileAdminForm
+from django.views.generic import View, RedirectView, UpdateView, CreateView
+from .forms import UserForm, ProfileForm, PostForm, CommentForm, ProfileAdminForm, CategoryForm
 from django.template.defaultfilters import slugify
 
 
@@ -146,7 +145,8 @@ class AddPostView(View):
     def get(self, request):
         form = self.form_class(None)
         blog = BlogSettings.objects.all()[0]
-        return render(request, self.template_name, {'form': form, 'blog': blog})
+        ctgs = Category.objects.all()
+        return render(request, self.template_name, {'form': form, 'blog': blog, 'ctgs': ctgs})
 
     # update post
     def post(self, request):
@@ -164,6 +164,27 @@ class AddPostView(View):
             form = PostForm()
             print('DEBUG ' + str(form.is_valid()))
             return render(request, self.template_name, {'form': form})
+
+
+class AddCategory(CreateView):
+    form_class = CategoryForm
+    template_name = 'blogpost/category_form.html'
+
+    def get(self, request):
+        form = self.form_class(None)
+        blog = BlogSettings.objects.all()[0]
+        return render(request, self.template_name, {'form': form, 'blog': blog})
+
+    def post(self, request):
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            new_ctg = Category(title=request.POST['title'])
+            new_ctg.save()
+            print('Name:' + request.POST['title'])
+            return redirect('blogpost:admin_view')
+        else:
+            print(form.errors.as_data())
+            return redirect('blogpost:add_category')
 
 
 class UpdatePost(UpdateView):

@@ -17,7 +17,8 @@
 						<div class="tab-pane fade in active" id="PostsTab">
 							<table class="table table-striped custab">
 								<thead>
-									{#                            <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>#}
+									<a href="{% url 'blogpost:add_post' %}" class="btn btn-primary pull-right"><b>+</b> Add new post</a>
+                                    <a href="{% url 'blogpost:add_category' %}" class="btn btn-primary pull-right"><b>+</b> Add new category</a>
 									<tr>
 										<th>Title</th>
 										<th>Author</th>

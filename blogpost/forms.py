@@ -30,7 +30,7 @@ class ProfileAdminForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
 
-    categories = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
+    # categories = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
 
     class Meta:
         model = Post
@@ -42,3 +42,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         exclude = ['user', 'profile', 'post']
+
+
+class CategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = ['title']

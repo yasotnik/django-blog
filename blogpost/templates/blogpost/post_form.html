@@ -21,9 +21,9 @@
 						<div class="form-group">
 							<label for="id_category">Category:</label>
 							<select id="id_category" name="category" class="selectpicker" data-width="100%" required>
-                            {% for instance in form.categories.field.queryset %}
+                            {% for ctg in ctgs %}
 
-								<option value="{{ instance.pk }}">{{ instance.title }}</option>
+								<option value="{{ ctg.pk }}">{{ ctg.title }}</option>
                             {% endfor %}
 
 							</select>

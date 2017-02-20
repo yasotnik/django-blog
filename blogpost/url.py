@@ -48,4 +48,8 @@ urlpatterns = [
     # URL for admin page
     url(r'^admin_panel/(?P<user>[^\.]+)/change_group$', views.AdminEditGroup.as_view(), name='change_group'),
 
+    # URL for add category form
+    url(r'^add_category/$', views.AddCategory.as_view(), name='add_category'),
+
+
 ]
