@@ -15,14 +15,14 @@
                     <div class="form-group">
 			    		<label for="avatar_id">Avatar image URL:</label>
                         <input id="avatar_id" class="form-control " type="text" name="avatar" value="{{ initial.avatar }}" placeholder="Image URL...">
-                        <span class="input-error">{{ form.avatar.errors }}</span>
+                        <span class="text-danger">{{ form.avatar.errors }}</span>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="form-group">
                                 <label for="facebook_id">Facebook link:</label>
                                 <input id="facebook_id" class="form-control " type="text" name="facebook" value="{{ initial.facebook }}" placeholder="Facebook link URL...">
-                                <span class="input-error">{{ form.facebook.errors }}</span>
+                                <span class="text-danger">{{ form.facebook.errors }}</span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -30,7 +30,7 @@
                                 <label for="twitter_id">Twitter link:</label>
                                 <input id="twitter_id" class="form-control " type="text" name="twitter" value="{{ initial.twitter }}"
                                 placeholder="Twitter link URL...">
-                                <span class="input-error">{{ form.twitter.errors }}</span>
+                                <span class="text-danger">{{ form.twitter.errors }}</span>
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                 <label for="github_id">Github link:</label>
                                 <input id="github_id" class="form-control " type="text" name="github" value="{{ initial.github }}"
                                 placeholder="Github link URL...">
-                                <span class="input-error">{{ form.github.errors }}</span>
+                                <span class="text-danger">{{ form.github.errors }}</span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -48,7 +48,7 @@
                                 <label for="email_id">Email:</label>
                                 <input id="email_id" class="form-control " type="email" name="email" value="{{ initial.email }}"
                                 placeholder="Email@site.com...">
-                                <span class="input-error">{{ form.email.errors }}</span>
+                                <span class="text-danger">{{ form.email.errors }}</span>
                             </div>
                         </div>
                     </div>

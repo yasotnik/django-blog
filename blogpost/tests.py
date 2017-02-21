@@ -1,10 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve
-from .views import home_page
+from .models import Post, Profile, Category
+import unittest
+from nose_parameterized import parameterized
 
-
-class HomePageTest(TestCase):
-
-    def test_root_url(self):
-        found = resolve('/')
-        self.assertEqual(found.func, home_page)

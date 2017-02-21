@@ -16,7 +16,7 @@
 
 			    		<label for="id_title">Category name:</label>
                         <input id="id_title" class="form-control " type="text" name="title" value="" placeholder="Name of the new category">
-                        <span class="input-error">{{ form.title.errors.as_text }}</span>
+                        <span class="text-danger">{{ form.title.errors.as_text }}</span>
                     </div>
 
                     <input type="submit" value="Add new category" class="btn btn-info btn-block">
