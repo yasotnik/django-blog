@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.views import generic
 from .models import Post, Category, BlogSettings, Profile, Comment
 from django.shortcuts import render, redirect, get_object_or_404
@@ -249,3 +250,4 @@ class AdminEditGroup(View):
         if form.is_valid():
             form.save()
             return redirect('blogpost:admin_view')
+

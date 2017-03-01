@@ -51,5 +51,4 @@ urlpatterns = [
     # URL for add category form
     url(r'^add_category/$', views.AddCategory.as_view(), name='add_category'),
 
-
 ]

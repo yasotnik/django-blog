@@ -15,7 +15,7 @@
 </script>
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
-{% bootstrap_javascript %}
+
 {# Load static files #}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'blogpost/css/style.css' %}" />
@@ -26,7 +26,7 @@
 <title>{{ blog.title }} - {{ blog.description }}</title>
 <!-- header nav -->
 <nav class="navbar navbar-default ">
-	<div class="container">
+	<div class="container col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -39,11 +39,11 @@
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<form class="navbar-form navbar-left">
+			<form class="navbar-form navbar-left" action="#" method="GET, POST">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
+					<input type="text" id='search_req' class="form-control" name='request' placeholder="Search">
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="submit" class="btn btn-default">Search</button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				{% if user.is_authenticated %}
@@ -103,9 +103,11 @@
 	</div>
 </nav>
 <!-- Content block -->
+<div class="container col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2">
 {% block content %}
-{% endblock %}
 
+{% endblock %}
+</div>
 
 <footer class="footer-bottom navbar-bottom row-fluid footer">
     <div class="black-line"></div>
@@ -121,3 +123,9 @@
 		</div>
 	</div>
 </footer>
+
+
+{% bootstrap_javascript %}
+<script src="{% static 'blogpost/js/app.js' %}"></script>
+{%  block javascript %}
+{% endblock %}
