@@ -1,44 +1,47 @@
 {% extends "blogpost/base.html" %}
 {% block content %}
-
-	<div class="jumbotron">
-		<h1>{{ blog.title }}</h1>
-		<p>{{ blog.description }}</p>
-	</div>
-
-    <div class="row col-lg-12 col-xs-12 col-md-12 row-eq-height">
-	    <div class="posts ">
-            {% for post in object_list %}
-                <div class="post col-lg-6 col-sm-12 col-xs-12 col-md-6">
-                    <div class="heading">
-                        <div>
-                            <h3>
-                                {{ post.title }}
-                                <small class="title"><span class="glyphicon glyphicon-tag"></span><a
-                                    href="{% url 'blogpost:category_view' post.category.slug %}">{{ post.category }}</a></small>
-                                <small class="author pull-right"><span class="glyphicon glyphicon-user"></span><a
-                                    href="{% url 'blogpost:profile' post.author %}">{{ post.author }}</a></small>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="image-container">
-                        <img src="{{ post.image }}" class="image">
-                    </div>
-                    <div class="preview">
-                        <p>{{ post.body_preview }}</p>
-                    </div>
-                    <div class="bottom">
-                        <div class="date pull-left">
-                            {{ post.posted|date:"d.m.y" }}
-                            {{ post.posted|time:"H:i" }}
-                        </div>
-                        <div class="pull-right"><a href="{% url 'blogpost:post' post.slug %}" class="read btn
-                            btn-info">Read</a></div>
+        <div class="pinned text-center col-lg-12 col-md-12 col-xs-12 col-sm-12" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ pinned.image }}); background-position: center center; ">
+            <div class="overtext">
+                <div class="category">{{ pinned.category }}</div>
+                <h1>{{ pinned.title }}</h1>
+                <div class="description">{{ pinned.body_preview }}</div>
+            </div>
+        </div>
+    <div class="posts col-lg-12 col-md-12 col-xs-12 col-sm-12">
+    {% for post in object_list %}
+        {% if post.pinned == 'NO' %}
+            <div class="wrapper-post" >
+                <div class="post text-center col-lg-4 col-md-4 col-xs-12 col-sm-12" id="{{ post.slug }}" style="background: url({{ post.image }}); background-size: cover; background-position: center center;">
+                    <div class="post-text" >
+                        <span>{{ post.category }}</span>
+                        <h2>{{ post.title }}</h2>
                     </div>
                 </div>
-            {% empty %}
-            <h3>No posts yet.</h3>
-            {% endfor %}
-        </div>
-	</div>
+            </div>
+
+        {% endif %}
+    {% endfor %}
+    </div>
 {% endblock content %}
+
+{% block javascript %}
+    <script>
+        var divWidth = $('.post').width();
+        $('.post').height(divWidth);
+        $('.post-text').height(divWidth * 0.3 - 25);
+        $('.post-text:odd').addClass('post-text-inverse');
+        $('.post-text-inverse').height(divWidth * 0.3 - 25);
+
+        $('.post').mouseover(function() {
+
+        } );
+        function handler(ev) {
+            var target = $(ev.target);
+            var elId = target.attr('id');
+            if ( target.is('.post') ) {
+                console.log('this is ' + elId);
+            }
+        }
+        $(".post").mouseover(handler);
+    </script>
+{% endblock %}

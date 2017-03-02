@@ -18,12 +18,18 @@ class BlogSettings(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=50, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # author = models.ForeignKey('auth.User')
     slug = models.SlugField(max_length=50, unique=True)
     body_preview = models.TextField(default="Preview of post", max_length=200, help_text="Brief overview of post")
     body = models.TextField()
     posted = models.DateTimeField(db_index=True, auto_now_add=True)
     image = models.CharField(max_length=1000)
+    NO = 'NO'
+    YES = 'YES'
+    PINNED = (
+        (NO, 'Not pinned'),
+        (YES, 'Pinned'),
+    )
+    pinned = models.CharField(max_length=3, choices=PINNED, default=NO)
     category = models.ForeignKey('blogpost.Category')
 
     def __str__(self):

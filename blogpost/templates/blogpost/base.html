@@ -20,112 +20,56 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'blogpost/css/style.css' %}" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 <title>{{ blog.title }} - {{ blog.description }}</title>
 <!-- header nav -->
-<nav class="navbar navbar-default ">
-	<div class="container col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="{% url 'blogpost:index' %}">{{ blog.title }}</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<form class="navbar-form navbar-left" action="#" method="GET, POST">
-				<div class="form-group">
-					<input type="text" id='search_req' class="form-control" name='request' placeholder="Search">
-				</div>
-				<button type="submit" class="btn btn-default">Search</button>
-			</form>
-			<ul class="nav navbar-nav navbar-right">
-				{% if user.is_authenticated %}
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><b>{{ user.username }}</b><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-                        {% if user.profile.user_group == 'AD' %}
-                            <li><a href="{% url 'blogpost:admin_view' %}">Admin panel</a></li>
-                            <li role="separator" class="divider"></li>
-						    <li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
-                        {% elif user.profile.user_group == 'WR' %}
-                            <li><a href="{% url 'blogpost:add_post' %}">Add post</a></li>
-                        {% endif %}
-						<li><a href="{% url 'blogpost:profile_edit' %}">Profile</a></li>
-						<li role="separator" class="divider"></li>
-						<li><a href="{% url 'blogpost:logout_user' %}">Logout</a></li>
-					</ul>
-				</li>
-				{% else %}
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-					<ul id="login-dp" class="dropdown-menu">
-						<li>
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form" role="form" method="post" action="
-										{% url 'blogpost:login_user'%}" accept-charset="UTF-8" id="login-nav">
-										{% csrf_token %}
-										<div class="form-group">
-											<label class="sr-only" for="username">Email address</label>
-											<input type="text" class="form-control" id="username" name="username"
-                                                   placeholder="Username" required>
-										</div>
-										<div class="form-group">
-											<label class="sr-only" for="password">Password</label>
-											<input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                                                   required>
-											<div class="help-block text-right"><a href="#">Forget the password ?</a></div>
-										</div>
-										<div class="form-group">
-											<button type="submit" class="btn btn-success btn-block">Sign in</button>
-										</div>
-									</form>
-								</div>
-								<div class="bottom text-center">
-									New here ? <a href="{% url 'blogpost:register' %}"><b>Sign up</b></a>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</li>
-				{% endif %}
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-</nav>
+<div class="row header vertical-align col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
+    <div class="menu text-center vertical-center col-lg-2 col-md-2 col-sm-2 col-sx-2">
+        <div><a href="#"><i class="fa fa-bars" aria-hidden="true"></i>MENU</a></div>
+    </div>
+    <div class="logo col-lg-8 col-md-8 col-xs-8 col-sm-8">
+        <div>ZEMLETRUS</div>
+    </div>
+    <div class="login vertical-center text-center col-lg-2 col-md-2 col-sm-2 col-sx-2">
+        <a href="#">LOGIN</a>
+    </div>
+</div>
 <!-- Content block -->
 <div class="container col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2">
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}
 </div>
 
-<footer class="footer-bottom navbar-bottom row-fluid footer">
-    <div class="black-line"></div>
-	<div class="container">
-		<p class="pull-left"> Copyright © 2016 - All Rights with {{ blog.title }} </p>
-		<div class="pull-right">
-			<ul class="nav nav-pills social">
-				<i class="fa fa-instagram" aria-hidden="true"></i>
-				<i class="fa fa-reddit" aria-hidden="true"></i>
-				<i class="fa fa-facebook-official" aria-hidden="true"></i>
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-			</ul>
-		</div>
-	</div>
-</footer>
+<div class="footer vertical-align col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
+    <div class="copyright text-center vertical-center col-lg-4 col-md-4 col-sm-4 col-sx-4">
+        <div>ZEMLETRUS<i class="fa fa-copyright" aria-hidden="true"></i>2017</div>
+    </div>
+    <div class="quote col-lg-4 col-md-4 col-xs-4 col-sm-4">
+        <div>Who the fuck you think you fuckin' with, I'm the fuckin' boss</div>
+    </div>
+    <div class="social vertical-center text-center col-lg-4 col-md-4 col-sm-4 col-sx-4">
+        Follow us:
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+        <i class="fa fa-facebook" aria-hidden="true"></i>
+        <i class="fa fa-pinterest" aria-hidden="true"></i>
+        <i class="fa fa-vk" aria-hidden="true"></i>
+    </div>
+</div>
+<div class="footer-bot text-center vertical-align col-lg-8 col-md-12 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-0 col-xs-offset-0 col-sm-offset-0">
+    {% for category in categories %}
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">{{ category.title }}</div>
+    {%  endfor %}
+</div>
+
+
 
 
 {% bootstrap_javascript %}
 <script src="{% static 'blogpost/js/app.js' %}"></script>
-{%  block javascript %}
+{% block javascript %}
 {% endblock %}

@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from django.views import generic
 from .models import Post, Category, BlogSettings, Profile, Comment
 from django.shortcuts import render, redirect, get_object_or_404
@@ -16,6 +15,8 @@ class PostsView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(PostsView, self).get_context_data(**kwargs)
         context['blog'] = BlogSettings.objects.all()[0]
+        context['pinned'] = Post.objects.all().get(pinned='YES')
+        context['categories'] = Category.objects.all()
         return context
 
 
