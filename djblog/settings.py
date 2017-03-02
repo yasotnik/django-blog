@@ -44,6 +44,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'django-blog-cms.herokuapp.com',
     '127.0.0.1',
+    'zemletrus.herokuapp.com',
 ]
 
 
